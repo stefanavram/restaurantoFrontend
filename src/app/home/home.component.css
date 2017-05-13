@@ -1,0 +1,35 @@
+md-sidenav-layout.m2app-dark {
+  background: black;
+}
+
+.app-content {
+  padding: 10px;
+}
+
+.app-content md-card {
+  margin: 10px;
+}
+
+.app-sidenav {
+  padding: 10px;
+  min-width: 100px;
+}
+
+.app-content md-checkbox {
+  margin: 10px;
+}
+
+.app-translate-bar{
+  text-align: right;
+}
+
+
+.app-toolbar-menu {
+  padding: 0 14px 0 14px;
+  color: white;
+  font-size: 130%;
+}
+
+.sebm-google-map-container {
+  height: 300px;
+}

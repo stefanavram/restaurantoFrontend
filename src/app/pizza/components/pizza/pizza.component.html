@@ -1,0 +1,11 @@
+<div class="item">
+  <div class="content">
+    <h1> {{pizza.name}} ({{pizza.weight}}) g </h1>
+    <h2> {{pizza.price | currency}} </h2>
+    <div> {{pizza.ingredients}} </div>
+  </div>
+  <div id="image" class="image">
+    <img [src]="pizza.image">
+  </div>
+  <app-reviews [reviews]="pizza.reviews" (addReview)="addReview($event)"></app-reviews>
+</div>

@@ -1,0 +1,46 @@
+<div *ngIf="!auth.authenticated()">
+  <p-messages [value]="msgs"></p-messages>
+</div>
+
+<div *ngIf="auth.authenticated()">
+  <md-card class="app-input-section">
+    <form (ngSubmit)="onSubmit()" #newForm="ngForm">
+
+      <img md-card-avatar [src]="auth.userProfile.picture" alt="" class="profile-img">
+      <md-input #name required maxlength="50" [(ngModel)]="reservation.name" [ngModelOptions]="{standalone: true}">
+        <md-placeholder>
+          <i class="material-icons app-input-icon">account_circle</i>Name
+        </md-placeholder>
+        <md-hint align="end">
+          {{name.characterCount}} / 50
+        </md-hint>
+      </md-input>
+
+
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-6">
+          <p>{{"DATE"| translate}}</p>
+          <p-calendar [(ngModel)]="reservation.reservationDate" [ngModelOptions]="{standalone: true}"
+                      [showIcon]="true" required></p-calendar>
+          <span style="margin-left:35px">{{reservation.reservationDate|date}}</span>
+        </div>
+      </div>
+
+      <div>
+        How many persons?
+        <md-slider required [(ngModel)]="reservation.persons" [ngModelOptions]="{standalone: true}" min="1" max="20"
+                   tick-interval="1" step="1"></md-slider>
+        <span> {{reservation.persons}}</span>
+      </div>
+
+
+      <md-checkbox [(ngModel)]="reservation.isWarm" [ngModelOptions]="{standalone: true}"
+                   [checked]="reservation.isWarm">{{"WARM"| translate}}
+      </md-checkbox>
+      <div class="row">
+        <button md-raised-button type="submit" color="primary" class="row">Send</button>
+      </div>
+    </form>
+  </md-card>
+  <p-growl [value]="messages"></p-growl>
+</div>

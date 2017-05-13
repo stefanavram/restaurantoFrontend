@@ -1,0 +1,17 @@
+{
+  "HOME": {
+    "TITLE": "Bun venit pe site-ul nostru !",
+    "SELECT": "Schimba limba",
+    "MAIN_PAGE": "Acasă",
+    "RESERVATION": "Rezervare",
+    "LOG_IN": "Autentificare",
+    "LOG_OUT": "Deconectare",
+    "MENU": "Meniu"
+  },
+  "MENU":{
+    "SOUPS": "Ciorbe",
+    "DESSERSTS": "Deserturi"
+  },
+  "WARM": "Sa incalzim pizza inainte de a ajunge?",
+  "DATE": "Ziua rezervării"
+}

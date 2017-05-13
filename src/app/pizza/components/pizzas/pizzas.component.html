@@ -1,0 +1,13 @@
+<h3> All the pizza we have </h3>
+<div id="pizza" *ngFor='let pizza of pizzas'>
+  <div class="item clickable well well-lg row" [routerLink]="['/pizzas', pizza.id]">
+    <div class="content col-xs-6 .col-md-4">
+      <h2> {{pizza.name}} ({{pizza.weight}}) g </h2>
+
+      <h3> {{pizza.price | currency}} </h3>
+    </div>
+    <div id="image" class="image col-xs-6 .col-md-4 ">
+      <img [src]="pizza.image">
+    </div>
+  </div>
+</div>

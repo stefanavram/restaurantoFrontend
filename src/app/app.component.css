@@ -1,0 +1,20 @@
+button.flat {
+  border: 1px solid #808080;
+  height: 30px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+button.flat:hover {
+  background: #e6e3e3;
+}
+
+button.list {
+  margin-left: 20px;
+  margin-top: 12px;
+}
+
+
+.app-toolbar-filler {
+  flex: 1 1 auto;
+}

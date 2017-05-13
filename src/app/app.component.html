@@ -1,3 +1,19 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar color="primary">
+  <span class="app-toolbar-menu">Restauranto</span>
+  <button md-button [routerLink]="['/']">{{'HOME.MAIN_PAGE' | translate}}</button>
+  <button md-button [md-menu-trigger-for]="menu">{{ 'HOME.MENU' | translate }}</button>
+  <button md-button [routerLink]="['/reservation']">{{ 'HOME.RESERVATION' | translate }}</button>
+  <span class="app-toolbar-filler"></span>
+  <button  md-raised-button color="accent" [routerLink]="['login']" *ngIf="!auth.authenticated()">{{ 'HOME.LOG_IN' | translate }}</button>
+  <button  md-raised-button color="accent" (click)="auth.logout()" *ngIf="auth.authenticated()">{{ 'HOME.LOG_OUT' | translate }}</button>
+
+</md-toolbar>
+
+<md-menu #menu="mdMenu">
+  <button md-menu-item [routerLink]="['/pizzas']">Pizza</button>
+  <button md-menu-item>{{'MENU.SOUPS' | translate}}</button>
+  <button md-menu-item>{{'MENU.DESSERSTS' | translate}}</button>
+</md-menu>
+
+<router-outlet></router-outlet>
+
