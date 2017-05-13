@@ -1,0 +1,17 @@
+{
+  "HOME": {
+    "TITLE": "Welcome to our site!",
+    "SELECT": "Change language",
+    "MAIN_PAGE": "Home",
+    "RESERVATION": "Reservation",
+    "LOG_IN": "Log in",
+    "LOG_OUT": "Log out",
+    "MENU": "Menu"
+  },
+  "MENU":{
+    "SOUPS": "Soups",
+    "DESSERSTS": "Desserts"
+  },
+  "WARM": "Should we warm the pizza before you arrive?",
+  "DATE": "Reservation date"
+}
