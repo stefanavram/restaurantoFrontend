@@ -9,7 +9,7 @@ import {PIZZA_SERVICE, PizzaService} from '../../services/pizza.service';
 })
 export class PizzasComponent {
 
-  private pizzas: Pizza[];
+  public pizzas: Pizza[];
 
   constructor(@Inject(PIZZA_SERVICE) private pizzaService: PizzaService) {
 

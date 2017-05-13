@@ -1,6 +1,3 @@
-/**
- * Created by stefan on 23/11/2016.
- */
 import {Injectable} from "@angular/core";
 import {tokenNotExpired} from "angular2-jwt";
 import {myConfig} from "./auth.config";
@@ -11,6 +8,10 @@ declare var Auth0: any;
 
 @Injectable()
 export class Auth {
+
+  //Store profile object in auth class
+  userProfile: Object;
+
   // Configure Auth0
   auth0 = new Auth0({
     domain: myConfig.domain,
@@ -18,7 +19,6 @@ export class Auth {
     callbackOnLocationHash: true,
     callbackURL: myConfig.callbackURL,
   });
-  userProfile: Object;
 
   constructor(private router: Router) {
     let result = this.auth0.parseHash(window.location.hash);
@@ -26,19 +26,19 @@ export class Auth {
     this.userProfile = JSON.parse(localStorage.getItem('profile'));
 
     if (result && result.idToken) {
-       localStorage.setItem('id_token', result.idToken);
+      localStorage.setItem('id_token', result.idToken);
 
-        // Fetch profile information
-        this.auth0.getProfile(result.idToken, (error, profile) => {
-          if (error) {
-            // Handle error
-            alert(error);
-            return;
-          }
+      // Fetch profile information
+      this.auth0.getProfile(result.idToken, (error, profile) => {
+        if (error) {
+          // Handle error
+          alert(error);
+          return;
+        }
 
-          localStorage.setItem('profile', JSON.stringify(profile));
-          this.userProfile = profile;
-        });
+        localStorage.setItem('profile', JSON.stringify(profile));
+        this.userProfile = profile;
+      });
       this.router.navigate(['/home']);
     }
     else if (result && result.error) {
@@ -46,33 +46,41 @@ export class Auth {
     }
   }
 
-  public signUp(username, password) {
-    this.auth0.signup({
-      connection: 'Username-Password-Authentication',
-      responseType: 'token',
-      email: username,
-      password: password,
-    }, function (err) {
+  public handleAuthentication(): void {
+    this.auth0.parseHash({_idTokenVerification: false}, (err, authResult) => {
       if (err) {
-        alert('something went wrong: ' + err.message);
+        alert(`Error: ${err.errorDescription}`)
+      }
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        window.location.hash = '';
+        localStorage.setItem('access_token', authResult.accessToken);
+        localStorage.setItem('id_token', authResult.idToken);
+        this.router.navigate(['/home']);
       }
     });
-  };
+  }
 
-  public login(username, password) {
-    this.auth0.login({
+  public login(username: string, password: string): void {
+    this.auth0.redirect.loginWithCredentials({
       connection: 'Username-Password-Authentication',
-      responseType: 'token',
-      email: username,
-      password: password,
-    }, function (err) {
-      if (err) {
-        alert('something went wrong: ' + err.message);
-      }
+      username,
+      password
+    }, err => {
+      if (err) return alert(err.description);
     });
-  };
+  }
 
-  public googleLogin() {
+  public signup(email, password): void {
+    this.auth0.redirect.signupAndLogin({
+      connection: 'Username-Password-Authentication',
+      email,
+      password,
+    }, err => {
+      if (err) return alert(err.description);
+    });
+  }
+
+  public loginWithGoogle(): void {
     this.auth0.login({
       connection: 'google-oauth2'
     }, function (err) {
@@ -80,18 +88,21 @@ export class Auth {
         alert('something went wrong: ' + err.message);
       }
     });
-  };
+  }
 
-  public authenticated() {
-    // Check if there's an unexpired JWT
-    // It searches for an item in localStorage with key == 'id_token'
-    return tokenNotExpired();
-  };
+  public isAuthenticated(): boolean {
+    // Check whether the id_token is expired or not
+    return tokenNotExpired('id_token');
+  }
 
-  public logout() {
+  public logout(): void {
     // Remove token from localStorage
+    localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
-    localStorage.removeItem('profile');
-    this.userProfile = undefined;
-  };
+  }
+
+  private setUser(authResult): void {
+    localStorage.setItem('access_token', authResult.accessToken);
+    localStorage.setItem('id_token', authResult.idToken);
+  }
 }

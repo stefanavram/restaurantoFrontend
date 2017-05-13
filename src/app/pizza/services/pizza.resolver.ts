@@ -10,7 +10,7 @@ export class PizzaResolver implements Resolve<Pizza> {
   constructor(@Inject(PIZZA_SERVICE) private pizzaService: PizzaService, private router: Router) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Pizza>|boolean {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.pizzaService.getPizza(route.params['id']).then(pizza => {
       console.log(pizza);
       if (pizza) {

@@ -10,12 +10,12 @@ import {Review} from '../../domain/review';
 export class ReviewsComponent {
 
   @Input()
-  private reviews: Review[];
+  public reviews: Review[];
 
   @Output()
-  private addReview = new EventEmitter<Review>();
+  public addReview = new EventEmitter<Review>();
 
-  private newReview: Review;
+  public newReview: Review;
 
   constructor() {
     this.newReview = <Review>{};

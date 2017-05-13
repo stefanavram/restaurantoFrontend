@@ -11,7 +11,7 @@ import {PIZZA_SERVICE, PizzaService} from '../../services/pizza.service';
 })
 export class PizzaComponent implements OnInit {
 
-  private pizza: Pizza;
+  public pizza: Pizza;
 
   constructor(private route: ActivatedRoute,
               @Inject(PIZZA_SERVICE) private pizzaService: PizzaService) {

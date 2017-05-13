@@ -15,12 +15,12 @@ export class ReservationComponent implements OnInit {
 
   private msgs: Message[] = [];
   private messages: Message[] = [];
-  private reservation: Reservation;
+  public reservation: Reservation;
 
-  constructor(private auth: Auth,
-              private  reservationService: ReservationService,
-              private translate: TranslateService) {
-    if (!auth.authenticated()) {
+  constructor(public auth: Auth,
+              public  reservationService: ReservationService,
+              public translate: TranslateService) {
+    if (!auth.isAuthenticated()) {
       this.notLogedIn();
     }
     else {

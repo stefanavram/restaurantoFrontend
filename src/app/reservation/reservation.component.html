@@ -1,20 +1,16 @@
-<div *ngIf="!auth.authenticated()">
+<div *ngIf="!auth.isAuthenticated()">
   <p-messages [value]="msgs"></p-messages>
 </div>
 
-<div *ngIf="auth.authenticated()">
+<div *ngIf="auth.isAuthenticated()">
   <md-card class="app-input-section">
     <form (ngSubmit)="onSubmit()" #newForm="ngForm">
 
       <img md-card-avatar [src]="auth.userProfile.picture" alt="" class="profile-img">
-      <md-input #name required maxlength="50" [(ngModel)]="reservation.name" [ngModelOptions]="{standalone: true}">
-        <md-placeholder>
-          <i class="material-icons app-input-icon">account_circle</i>Name
-        </md-placeholder>
-        <md-hint align="end">
-          {{name.characterCount}} / 50
-        </md-hint>
-      </md-input>
+      <md-input-container #name required maxlength="50" [(ngModel)]="reservation.name"
+                          [ngModelOptions]="{standalone: true}" ngDefaultControl>
+        <input mdInput placeholder="Name">
+      </md-input-container>
 
 
       <div class="ui-g">

@@ -4,8 +4,12 @@
   <button md-button [md-menu-trigger-for]="menu">{{ 'HOME.MENU' | translate }}</button>
   <button md-button [routerLink]="['/reservation']">{{ 'HOME.RESERVATION' | translate }}</button>
   <span class="app-toolbar-filler"></span>
-  <button  md-raised-button color="accent" [routerLink]="['login']" *ngIf="!auth.authenticated()">{{ 'HOME.LOG_IN' | translate }}</button>
-  <button  md-raised-button color="accent" (click)="auth.logout()" *ngIf="auth.authenticated()">{{ 'HOME.LOG_OUT' | translate }}</button>
+  <button md-raised-button color="accent" [routerLink]="['login']" *ngIf="!auth.isAuthenticated()">{{ 'HOME.LOG_IN' |
+    translate }}
+  </button>
+  <button md-raised-button color="accent" (click)="auth.logout()" *ngIf="auth.isAuthenticated()">{{ 'HOME.LOG_OUT' |
+    translate }}
+  </button>
 
 </md-toolbar>
 
@@ -14,6 +18,5 @@
   <button md-menu-item>{{'MENU.SOUPS' | translate}}</button>
   <button md-menu-item>{{'MENU.DESSERSTS' | translate}}</button>
 </md-menu>
-
 <router-outlet></router-outlet>
 

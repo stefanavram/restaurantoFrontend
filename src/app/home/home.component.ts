@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   public slides: Array<any> = [];
 
 
-  constructor(private translate: TranslateService) {
+  constructor(public translate: TranslateService) {
     //adding slides for carousel
     for (let i = 0; i < 3; i++) {
       this.addSlide();
