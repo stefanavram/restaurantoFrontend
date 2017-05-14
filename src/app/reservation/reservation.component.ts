@@ -41,9 +41,8 @@ export class ReservationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.reservation.createdOn = new Date();
     console.log(this.reservation);
-    // this.reservationService.addReservation(this.reservation);
+    this.reservationService.addReservation(this.reservation);
     this.messages.push({severity: 'success', summary: 'Success Message', detail: 'Order submitted'});
 
   }

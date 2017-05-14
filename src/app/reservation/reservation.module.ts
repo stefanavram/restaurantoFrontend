@@ -11,6 +11,7 @@ import {MessagesModule,CalendarModule,GrowlModule} from 'primeng/primeng';
 import {ReservationService} from "./reservation.service";
 import {Ng2BootstrapModule} from "ngx-bootstrap";
 import {TranslateModule} from "@ngx-translate/core";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import {TranslateModule} from "@ngx-translate/core";
     TranslateModule,
     MessagesModule,
     CalendarModule,
-    GrowlModule
+    GrowlModule,
+    FormsModule
   ],
   providers:[
     ReservationService

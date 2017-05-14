@@ -37,7 +37,7 @@ export class ReservationService extends RestService {
   }
 
   addReservation(reservation: Reservation): Promise<Reservation> {
-    this._url =  this._url+ '/addReservation/' + reservation.name;
+    this._url = this._url + '/addReservation/';
     return this.putData(JSON.stringify(reservation));
   }
 
